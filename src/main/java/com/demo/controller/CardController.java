@@ -3,9 +3,14 @@ package com.demo.controller;
 import com.demo.domains.Card;
 import com.demo.service.CardService;
 import com.alibaba.fastjson.JSONObject;
+import com.demo.util.CommunicationData;
+import com.sun.xml.internal.bind.v2.TODO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -14,6 +19,7 @@ import java.util.List;
  * @date 2021/9/12 14:48
  * @description TODO
  */
+@Slf4j
 @RestController
 @RequestMapping("api/card")
 public class CardController {
@@ -22,68 +28,53 @@ public class CardController {
     private CardService cardService;
 
     @PostMapping("getCardMsg")
-    public JSONObject getCardMsg(@RequestBody Card pojo) {
-        JSONObject jsonObject = new JSONObject();
-        List<Card> select = cardService.select(pojo);
-        if (select.size() > 0) {
-            jsonObject.put("errorMsg", "");
-            jsonObject.put("success", true);
-            jsonObject.put("data", select.get(0));
-            return jsonObject;
+    public CommunicationData getCardMsg(@RequestBody Card pojo) {
+        try {
+            List<Card> select = cardService.select(pojo);
+            return CommunicationData.SUCCESS().data(select);
+        }catch (Exception e) {
+            log.error("CardController#getCardMsg error");
         }
-
-        //错误信息
-        jsonObject.put("errorMsg", "查询失败");
-        //是否成功
-        jsonObject.put("success", false);
-        //返回的数据
-        jsonObject.put("data", "");
-        return jsonObject;
+        return CommunicationData.FAIL("查询失败");
     }
+
     @PutMapping("addCard")
-    public JSONObject addCard(@RequestBody Card card) {
-        JSONObject jsonObject = new JSONObject();
-        int insert = cardService.insert(card);
-        if (insert > 0) {
-            jsonObject.put("errorMsg", "");
-            jsonObject.put("success", true);
-            jsonObject.put("data", "");
-            return jsonObject;
+    public CommunicationData addCard(@RequestBody Card card) {
+        // TODO 此处的方法应该在sql执行之后
+        card.setVersion(1);
+        card.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        card.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        try {
+            int insert = cardService.insert(card);
+            if (insert > 0) {
+                return CommunicationData.SUCCESS();
+            }
+        }catch (Exception e) {
+            log.error("CardController#addCard error");
         }
-
-        //错误信息
-        jsonObject.put("errorMsg", "新增失败");
-        //是否成功
-        jsonObject.put("success", false);
-        //返回的数据
-        jsonObject.put("data", "");
-        return jsonObject;
+        return CommunicationData.FAIL("插入失败");
     }
 
 
-    /**
-     * TODO 对于卡片的删除操作应该在硬件设备进行匹配，如果有删除接口此处可以提供
-     * @param card
-     * @return
-     */
-    @PostMapping("delCard")
-    public JSONObject delCard(@RequestBody Card card) {
-        JSONObject jsonObject = new JSONObject();
-        int update = cardService.update(card);
-        if (update > 0) {
-            jsonObject.put("errorMsg", "");
-            jsonObject.put("success", true);
-            jsonObject.put("data", "");
-            return jsonObject;
+    @PostMapping("updateCard")
+    public CommunicationData updateCard(@RequestBody Card card) {
+        // TODO 此处的方法应该在sql执行之后
+        card.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        try {
+            Card tempCard = new Card();
+            tempCard.setId(card.getId());
+            List<Card> select = cardService.select(tempCard);
+            if (select.size() == 1) {
+                card.setVersion(select.get(0).getVersion()+1);
+                int update = cardService.update(card);
+                if (update > 0) {
+                    return CommunicationData.SUCCESS();
+                }
+            }
+        }catch (Exception e) {
+            log.error("CardController#updateCard error");
         }
-
-        //错误信息
-        jsonObject.put("errorMsg", "删除失败");
-        //是否成功
-        jsonObject.put("success", false);
-        //返回的数据
-        jsonObject.put("data", "");
-        return jsonObject;
+        return CommunicationData.FAIL("更新失败");
     }
 
 

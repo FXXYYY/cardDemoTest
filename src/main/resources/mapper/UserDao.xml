@@ -18,7 +18,7 @@
 
 <!--auto generated Code-->
     <insert id="insert">
-        INSERT INTO user
+        INSERT INTO tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pojo.id != null"> id, </if>
             <if test="pojo.name != null"> name, </if>
@@ -34,7 +34,7 @@
 
 <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO user(
+        INSERT INTO tb_user(
         <include refid="all_column"/>
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
@@ -48,7 +48,7 @@
 
 <!--auto generated Code-->
     <update id="update">
-        UPDATE user
+        UPDATE tb_user
         <set>
             <if test="pojo.id != null"> id = #{pojo.id}, </if>
             <if test="pojo.name != null"> name = #{pojo.name}, </if>
@@ -60,7 +60,7 @@
 <!--auto generated Code-->
     <select id="select" resultMap="AllColumnMap">
         SELECT <include refid="all_column"/>
-        FROM user
+        FROM tb_user
         <where>
             <if test="pojo.id != null"> AND id = #{pojo.id} </if>
             <if test="pojo.name != null"> AND name = #{pojo.name} </if>
@@ -71,6 +71,6 @@
 
 <!--auto generated Code-->
     <delete id="delete">
-        DELETE FROM user where id = #{id}
+        DELETE FROM tb_user where id = #{id}
     </delete>
 </mapper>

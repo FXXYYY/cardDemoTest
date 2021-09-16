@@ -9,6 +9,8 @@
         <result column="supplier_pkg_id" property="supplierPkgId"/>
         <result column="supplier_product_id" property="supplierProductId"/>
         <result column="supplier_attr_id" property="supplierAttrId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
         <result column="supplier_value" property="supplierValue"/>
     </resultMap>
 
@@ -19,12 +21,14 @@
         supplier_pkg_id,
         supplier_product_id,
         supplier_attr_id,
-        supplier_value
+        supplier_value,
+        create_time,
+        modify_time
     </sql>
 
 <!--auto generated Code-->
     <insert id="insert">
-        INSERT INTO tariff_package
+        INSERT INTO tb_tariff_package
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pojo.id != null"> id, </if>
             <if test="pojo.name != null"> name, </if>
@@ -32,6 +36,8 @@
             <if test="pojo.supplierProductId != null"> supplier_product_id, </if>
             <if test="pojo.supplierAttrId != null"> supplier_attr_id, </if>
             <if test="pojo.supplierValue != null"> supplier_value, </if>
+            <if test="pojo.createTime != null"> create_time, </if>
+            <if test="pojo.modifyTime != null"> modify_time, </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -41,12 +47,14 @@
             <if test="pojo.supplierProductId != null"> #{pojo.supplierProductId}, </if>
             <if test="pojo.supplierAttrId != null"> #{pojo.supplierAttrId}, </if>
             <if test="pojo.supplierValue != null"> #{pojo.supplierValue}, </if>
+            <if test="pojo.createTime != null"> #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> #{pojo.modifyTime}, </if>
         </trim>
     </insert>
 
 <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO tariff_package(
+        INSERT INTO tb_tariff_package(
         <include refid="all_column"/>
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
@@ -56,20 +64,24 @@
             #{pojo.supplierPkgId},
             #{pojo.supplierProductId},
             #{pojo.supplierAttrId},
-            #{pojo.supplierValue}
+            #{pojo.supplierValue},
+            #{pojo.createTime},
+            #{pojo.modifyTime}
             )
         </foreach>
     </insert>
 
 <!--auto generated Code-->
     <update id="update">
-        UPDATE tariff_package
+        UPDATE tb_tariff_package
         <set>
             <if test="pojo.id != null"> id = #{pojo.id}, </if>
             <if test="pojo.name != null"> name = #{pojo.name}, </if>
             <if test="pojo.supplierPkgId != null"> supplier_pkg_id = #{pojo.supplierPkgId}, </if>
             <if test="pojo.supplierProductId != null"> supplier_product_id = #{pojo.supplierProductId}, </if>
             <if test="pojo.supplierAttrId != null"> supplier_attr_id = #{pojo.supplierAttrId}, </if>
+            <if test="pojo.createTime != null"> create_time = #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> modify_time = #{pojo.modifyTime}, </if>
             <if test="pojo.supplierValue != null"> supplier_value = #{pojo.supplierValue} </if>
         </set>
          WHERE id = #{pojo.id}
@@ -78,7 +90,7 @@
 <!--auto generated Code-->
     <select id="select" resultMap="AllColumnMap">
         SELECT <include refid="all_column"/>
-        FROM tariff_package
+        FROM tb_tariff_package
         <where>
             <if test="pojo.id != null"> AND id = #{pojo.id} </if>
             <if test="pojo.name != null"> AND name = #{pojo.name} </if>
@@ -86,12 +98,14 @@
             <if test="pojo.supplierProductId != null"> AND supplier_product_id = #{pojo.supplierProductId} </if>
             <if test="pojo.supplierAttrId != null"> AND supplier_attr_id = #{pojo.supplierAttrId} </if>
             <if test="pojo.supplierValue != null"> AND supplier_value = #{pojo.supplierValue} </if>
+            <if test="pojo.createTime != null"> AND create_time = #{pojo.createTime} </if>
+            <if test="pojo.modifyTime != null"> AND modify_time = #{pojo.modifyTime} </if>
         </where>
         LIMIT 1000 
     </select>
 
 <!--auto generated Code-->
     <delete id="delete">
-        DELETE FROM tariff_package where id = #{id}
+        DELETE FROM tb_tariff_package where id = #{id}
     </delete>
 </mapper>

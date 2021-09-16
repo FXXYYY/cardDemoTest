@@ -9,6 +9,8 @@
         <result column="res_id" property="resId"/>
         <result column="status" property="status"/>
         <result column="is_delete" property="isDelete"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
     </resultMap>
 
 <!--auto generated Code-->
@@ -17,18 +19,22 @@
         user_id,
         res_id,
         status,
-        is_delete
+        is_delete,
+        create_time,
+        modify_time
     </sql>
 
 <!--auto generated Code-->
     <insert id="insert">
-        INSERT INTO debit_card
+        INSERT INTO tb_debit_card
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pojo.id != null"> id, </if>
             <if test="pojo.userId != null"> user_id, </if>
             <if test="pojo.resId != null"> res_id, </if>
             <if test="pojo.status != null"> status, </if>
             <if test="pojo.isDelete != null"> is_delete, </if>
+            <if test="pojo.createTime != null"> create_time, </if>
+            <if test="pojo.modifyTime != null"> modify_time, </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -37,33 +43,37 @@
             <if test="pojo.resId != null"> #{pojo.resId}, </if>
             <if test="pojo.status != null"> #{pojo.status}, </if>
             <if test="pojo.isDelete != null"> #{pojo.isDelete}, </if>
+            <if test="pojo.createTime != null"> #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> #{pojo.modifyTime}, </if>
         </trim>
     </insert>
 
 <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO debit_card(
+        INSERT INTO tb_debit_card(
         <include refid="all_column"/>
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
             (
-            #{pojo.id},
             #{pojo.userId},
             #{pojo.resId},
             #{pojo.status},
-            #{pojo.isDelete}
+            #{pojo.isDelete},
+            #{pojo.createTime},
+            #{pojo.modifyTime}
             )
         </foreach>
     </insert>
 
 <!--auto generated Code-->
     <update id="update">
-        UPDATE debit_card
+        UPDATE tb_debit_card
         <set>
-            <if test="pojo.id != null"> id = #{pojo.id}, </if>
             <if test="pojo.userId != null"> user_id = #{pojo.userId}, </if>
             <if test="pojo.resId != null"> res_id = #{pojo.resId}, </if>
             <if test="pojo.status != null"> status = #{pojo.status}, </if>
+            <if test="pojo.createTime != null"> create_time = #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> modify_time = #{pojo.modifyTime}, </if>
             <if test="pojo.isDelete != null"> is_delete = #{pojo.isDelete} </if>
         </set>
          WHERE id = #{pojo.id}
@@ -72,12 +82,14 @@
 <!--auto generated Code-->
     <select id="select" resultMap="AllColumnMap">
         SELECT <include refid="all_column"/>
-        FROM debit_card
+        FROM tb_debit_card
         <where>
             <if test="pojo.id != null"> AND id = #{pojo.id} </if>
             <if test="pojo.userId != null"> AND user_id = #{pojo.userId} </if>
             <if test="pojo.resId != null"> AND res_id = #{pojo.resId} </if>
             <if test="pojo.status != null"> AND status = #{pojo.status} </if>
+            <if test="pojo.createTime != null"> AND create_time = #{pojo.createTime} </if>
+            <if test="pojo.modifyTime != null"> AND modify_time = #{pojo.modifyTime} </if>
             <if test="pojo.isDelete != null"> AND is_delete = #{pojo.isDelete} </if>
         </where>
         LIMIT 1000 
@@ -85,6 +97,6 @@
 
 <!--auto generated Code-->
     <delete id="delete">
-        DELETE FROM debit_card where id = #{id}
+        DELETE FROM tb_debit_card where id = #{id}
     </delete>
 </mapper>

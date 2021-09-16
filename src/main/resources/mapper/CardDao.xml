@@ -8,7 +8,11 @@
         <result column="msisdn" property="msisdn"/>
         <result column="iccid" property="iccid"/>
         <result column="imsi" property="imsi"/>
+        <result column="carrier_type" property="carrierType"/>
         <result column="pkg_id" property="pkgId"/>
+        <result column="version" property="version"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
         <result column="remark" property="remark"/>
     </resultMap>
 
@@ -18,44 +22,57 @@
         msisdn,
         iccid,
         imsi,
+        carrier_type,
         pkg_id,
+        version,
+        create_time,
+        modify_time,
         remark
     </sql>
 
 <!--auto generated Code-->
     <insert id="insert">
-        INSERT INTO card
+        INSERT INTO tb_card
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id != null"> id, </if>
             <if test="pojo.msisdn != null"> msisdn, </if>
             <if test="pojo.iccid != null"> iccid, </if>
-            <if test="pojo.imsi != null"> imsi, </if>
+            <if test="pojo.carrierType != null"> imsi, </if>
+            <if test="pojo.imsi != null"> carrier_type, </if>
             <if test="pojo.pkgId != null"> pkg_id, </if>
+            version,
+            <if test="pojo.createTime != null"> create_time, </if>
+            <if test="pojo.modifyTime != null"> modify_time, </if>
             <if test="pojo.remark != null"> remark, </if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pojo.id != null"> #{pojo.id}, </if>
             <if test="pojo.msisdn != null"> #{pojo.msisdn}, </if>
             <if test="pojo.iccid != null"> #{pojo.iccid}, </if>
             <if test="pojo.imsi != null"> #{pojo.imsi}, </if>
+            <if test="pojo.carrierType != null"> #{pojo.carrierType}, </if>
             <if test="pojo.pkgId != null"> #{pojo.pkgId}, </if>
+            1,
+            <if test="pojo.createTime != null"> #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> #{pojo.modifyTime}, </if>
             <if test="pojo.remark != null"> #{pojo.remark}, </if>
         </trim>
     </insert>
 
 <!--auto generated Code-->
     <insert id="insertList">
-        INSERT INTO card(
+        INSERT INTO tb_card(
         <include refid="all_column"/>
         )VALUES
         <foreach collection="pojos" item="pojo" index="index" separator=",">
             (
-            #{pojo.id},
             #{pojo.msisdn},
             #{pojo.iccid},
             #{pojo.imsi},
+            #{pojo.carrierType},
             #{pojo.pkgId},
+            #{pojo.version},
+            #{pojo.createTime},
+            #{pojo.modifyTime},
             #{pojo.remark}
             )
         </foreach>
@@ -63,13 +80,16 @@
 
 <!--auto generated Code-->
     <update id="update">
-        UPDATE card
+        UPDATE tb_card
         <set>
-            <if test="pojo.id != null"> id = #{pojo.id}, </if>
             <if test="pojo.msisdn != null"> msisdn = #{pojo.msisdn}, </if>
             <if test="pojo.iccid != null"> iccid = #{pojo.iccid}, </if>
             <if test="pojo.imsi != null"> imsi = #{pojo.imsi}, </if>
+            <if test="pojo.carrierType != null"> imsi = #{pojo.carrierType}, </if>
             <if test="pojo.pkgId != null"> pkg_id = #{pojo.pkgId}, </if>
+            <if test="pojo.version != null"> version = #{pojo.version}, </if>
+            <if test="pojo.createTime != null"> create_time = #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> modify_time = #{pojo.modifyTime}, </if>
             <if test="pojo.remark != null"> remark = #{pojo.remark} </if>
         </set>
          WHERE id = #{pojo.id}
@@ -78,13 +98,17 @@
 <!--auto generated Code-->
     <select id="select" resultMap="AllColumnMap">
         SELECT <include refid="all_column"/>
-        FROM card
+        FROM tb_card
         <where>
             <if test="pojo.id != null"> AND id = #{pojo.id} </if>
             <if test="pojo.msisdn != null"> AND msisdn = #{pojo.msisdn} </if>
             <if test="pojo.iccid != null"> AND iccid = #{pojo.iccid} </if>
             <if test="pojo.imsi != null"> AND imsi = #{pojo.imsi} </if>
+            <if test="pojo.carrierType != null"> AND imsi = #{pojo.carrierType} </if>
             <if test="pojo.pkgId != null"> AND pkg_id = #{pojo.pkgId} </if>
+            <if test="pojo.version != null"> AND version = #{pojo.version} </if>
+            <if test="pojo.createTime != null"> AND create_time = #{pojo.createTime} </if>
+            <if test="pojo.modifyTime != null"> AND modify_time = #{pojo.modifyTime} </if>
             <if test="pojo.remark != null"> AND remark = #{pojo.remark} </if>
         </where>
         LIMIT 1000 
@@ -92,6 +116,6 @@
 
 <!--auto generated Code-->
     <delete id="delete">
-        DELETE FROM card where id = #{id}
+        DELETE FROM tb_card where id = #{id}
     </delete>
 </mapper>

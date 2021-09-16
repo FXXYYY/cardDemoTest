@@ -38,7 +38,7 @@ public class Card {
     /**
      * 运营商CMCC，CTCC，CUCC
      */
-    private Enum<CarrierType> carrier;
+    private String carrierType;
 
     /**
      * 套餐包-关联外键
@@ -48,12 +48,17 @@ public class Card {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private String createTime;
+
+    /**
+     * 版本
+     */
+    private Integer version;
 
     /**
      * 修改时间
      */
-    private LocalDateTime modifyTime;
+    private String modifyTime;
 
     /**
      * 备注

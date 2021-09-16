@@ -31,13 +31,13 @@ public class DebitCard {
     /**
      * 创建时间T
      */
-    private LocalDateTime createTime;
+    private String createTime;
 
 
     /**
      * 修改时间
      */
-    private LocalDateTime modifyTime;
+    private String modifyTime;
 
     /**
      * 状态 TODO 此字段的用处？
