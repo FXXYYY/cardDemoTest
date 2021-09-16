@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.TariffPackageDao">
+
+<!--auto generated Code-->
+    <resultMap id="AllColumnMap" type="com.demo.domains.TariffPackage">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="supplier_pkg_id" property="supplierPkgId"/>
+        <result column="supplier_product_id" property="supplierProductId"/>
+        <result column="supplier_attr_id" property="supplierAttrId"/>
+        <result column="supplier_value" property="supplierValue"/>
+    </resultMap>
+
+<!--auto generated Code-->
+    <sql id="all_column">
+        id,
+        name,
+        supplier_pkg_id,
+        supplier_product_id,
+        supplier_attr_id,
+        supplier_value
+    </sql>
+
+<!--auto generated Code-->
+    <insert id="insert">
+        INSERT INTO tariff_package
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> id, </if>
+            <if test="pojo.name != null"> name, </if>
+            <if test="pojo.supplierPkgId != null"> supplier_pkg_id, </if>
+            <if test="pojo.supplierProductId != null"> supplier_product_id, </if>
+            <if test="pojo.supplierAttrId != null"> supplier_attr_id, </if>
+            <if test="pojo.supplierValue != null"> supplier_value, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.name != null"> #{pojo.name}, </if>
+            <if test="pojo.supplierPkgId != null"> #{pojo.supplierPkgId}, </if>
+            <if test="pojo.supplierProductId != null"> #{pojo.supplierProductId}, </if>
+            <if test="pojo.supplierAttrId != null"> #{pojo.supplierAttrId}, </if>
+            <if test="pojo.supplierValue != null"> #{pojo.supplierValue}, </if>
+        </trim>
+    </insert>
+
+<!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO tariff_package(
+        <include refid="all_column"/>
+        )VALUES
+        <foreach collection="pojos" item="pojo" index="index" separator=",">
+            (
+            #{pojo.id},
+            #{pojo.name},
+            #{pojo.supplierPkgId},
+            #{pojo.supplierProductId},
+            #{pojo.supplierAttrId},
+            #{pojo.supplierValue}
+            )
+        </foreach>
+    </insert>
+
+<!--auto generated Code-->
+    <update id="update">
+        UPDATE tariff_package
+        <set>
+            <if test="pojo.id != null"> id = #{pojo.id}, </if>
+            <if test="pojo.name != null"> name = #{pojo.name}, </if>
+            <if test="pojo.supplierPkgId != null"> supplier_pkg_id = #{pojo.supplierPkgId}, </if>
+            <if test="pojo.supplierProductId != null"> supplier_product_id = #{pojo.supplierProductId}, </if>
+            <if test="pojo.supplierAttrId != null"> supplier_attr_id = #{pojo.supplierAttrId}, </if>
+            <if test="pojo.supplierValue != null"> supplier_value = #{pojo.supplierValue} </if>
+        </set>
+         WHERE id = #{pojo.id}
+    </update>
+
+<!--auto generated Code-->
+    <select id="select" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM tariff_package
+        <where>
+            <if test="pojo.id != null"> AND id = #{pojo.id} </if>
+            <if test="pojo.name != null"> AND name = #{pojo.name} </if>
+            <if test="pojo.supplierPkgId != null"> AND supplier_pkg_id = #{pojo.supplierPkgId} </if>
+            <if test="pojo.supplierProductId != null"> AND supplier_product_id = #{pojo.supplierProductId} </if>
+            <if test="pojo.supplierAttrId != null"> AND supplier_attr_id = #{pojo.supplierAttrId} </if>
+            <if test="pojo.supplierValue != null"> AND supplier_value = #{pojo.supplierValue} </if>
+        </where>
+        LIMIT 1000 
+    </select>
+
+<!--auto generated Code-->
+    <delete id="delete">
+        DELETE FROM tariff_package where id = #{id}
+    </delete>
+</mapper>
