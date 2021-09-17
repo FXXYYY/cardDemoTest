@@ -28,53 +28,19 @@ public class CardController {
     private CardService cardService;
 
     @PostMapping("getCardMsg")
-    public CommunicationData getCardMsg(@RequestBody Card pojo) {
-        try {
-            List<Card> select = cardService.select(pojo);
-            return CommunicationData.SUCCESS().data(select);
-        }catch (Exception e) {
-            log.error("CardController#getCardMsg error");
-        }
-        return CommunicationData.FAIL("查询失败");
+    public CommunicationData getCardMsg(@RequestBody Card card) {
+        return cardService.selectCard(card);
     }
 
     @PutMapping("addCard")
     public CommunicationData addCard(@RequestBody Card card) {
-        // TODO 此处的方法应该在sql执行之后
-        card.setVersion(1);
-        card.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        card.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        try {
-            int insert = cardService.insert(card);
-            if (insert > 0) {
-                return CommunicationData.SUCCESS();
-            }
-        }catch (Exception e) {
-            log.error("CardController#addCard error");
-        }
-        return CommunicationData.FAIL("插入失败");
+        return cardService.insertCard(card);
     }
 
 
     @PostMapping("updateCard")
     public CommunicationData updateCard(@RequestBody Card card) {
-        // TODO 此处的方法应该在sql执行之后
-        card.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        try {
-            Card tempCard = new Card();
-            tempCard.setId(card.getId());
-            List<Card> select = cardService.select(tempCard);
-            if (select.size() == 1) {
-                card.setVersion(select.get(0).getVersion()+1);
-                int update = cardService.update(card);
-                if (update > 0) {
-                    return CommunicationData.SUCCESS();
-                }
-            }
-        }catch (Exception e) {
-            log.error("CardController#updateCard error");
-        }
-        return CommunicationData.FAIL("更新失败");
+        return cardService.updateCard(card);
     }
 
 

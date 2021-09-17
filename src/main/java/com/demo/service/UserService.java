@@ -1,6 +1,8 @@
 package com.demo.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.demo.domains.User;
+import com.demo.util.CommunicationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -41,5 +43,27 @@ public interface UserService {
      * @return
      */
     public int update(User pojo);
+
+    /**
+     * 查询
+     * @param pojo
+     * @return
+     */
+    CommunicationData selectUser(User pojo);
+
+    /**
+     * 添加
+     * @param debitCard
+     * @return
+     */
+    CommunicationData addUser(User debitCard);
+
+    /**
+     * 修改
+     * @param debitCard
+     * @return
+     */
+    CommunicationData updateUser(User debitCard);
+
 
 }

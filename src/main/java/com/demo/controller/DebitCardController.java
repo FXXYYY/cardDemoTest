@@ -2,6 +2,7 @@ package com.demo.controller;
 
 import com.demo.domains.Card;
 import com.demo.domains.DebitCard;
+import com.demo.domains.User;
 import com.demo.service.CardService;
 import com.demo.service.DebitCardService;
 import com.demo.util.CommunicationData;
@@ -19,7 +20,6 @@ import java.util.List;
  * @date 2021/9/12 14:47
  * @description TODO
  */
-@Slf4j
 @RestController
 @RequestMapping("api/debitCard")
 public class DebitCardController {
@@ -28,50 +28,19 @@ public class DebitCardController {
 
     @PostMapping("getDebitCard")
     public CommunicationData getDebitCard(@RequestBody DebitCard pojo) {
-        try {
-            List<DebitCard> select = debitCardService.select(pojo);
-            return CommunicationData.SUCCESS().data(select);
-        }catch (Exception e) {
-            log.error("DebitCardController#getDebitCard error");
-        }
-        return CommunicationData.FAIL("查询失败");
+        return debitCardService.selectDebitCard(pojo);
     }
 
     @PutMapping("addDebitCard")
     public CommunicationData addDebitCard(@RequestBody DebitCard debitCard) {
-        // TODO 此处的方法应该在sql执行之后
-        debitCard.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        debitCard.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        try {
-            int insert = debitCardService.insert(debitCard);
-            if (insert > 0) {
-                return CommunicationData.SUCCESS();
-            }
-        }catch (Exception e) {
-            log.error("DebitCardController#addDebitCard error");
-        }
-        return CommunicationData.FAIL("插入失败");
+        return debitCardService.addDebitCard(debitCard);
     }
 
 
     @PostMapping("updateDebitCard")
     public CommunicationData updateDebitCard(@RequestBody DebitCard debitCard) {
-        // TODO 此处的方法应该在sql执行之后
-        debitCard.setModifyTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
-        try {
-            DebitCard temp = new DebitCard();
-            temp.setId(debitCard.getId());
-            List<DebitCard> select = debitCardService.select(temp);
-            if (select.size() == 1) {
-                int update = debitCardService.update(debitCard);
-                if (update > 0) {
-                    return CommunicationData.SUCCESS();
-                }
-            }
-        }catch (Exception e) {
-            log.error("DebitCardController#updateDebitCard error");
-        }
-        return CommunicationData.FAIL("更新失败");
+        return debitCardService.updateDebitCard(debitCard);
     }
+
 
 }

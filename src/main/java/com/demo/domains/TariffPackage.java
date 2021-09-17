@@ -49,12 +49,12 @@ public class TariffPackage {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private String createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime modifyTime;
+    private String modifyTime;
 
 
 

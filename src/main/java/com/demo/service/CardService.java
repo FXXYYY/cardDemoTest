@@ -2,7 +2,10 @@ package com.demo.service;
 
 import com.demo.domains.Card;
 import com.demo.dao.CardDao;
+import com.demo.util.CommunicationData;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -12,32 +15,27 @@ import java.util.List;
 public interface CardService {
 
 
-    /**
-     * 插入
-     * @param pojo
-     * @return
-     */
-    public int insert(Card pojo);
-
-    /**
-     * 插入
-     * @param pojos
-     * @return
-     */
-    public int insertList(List< Card> pojos);
 
     /**
      * 查询
      * @param pojo
      * @return
      */
-    public List<Card> select(Card pojo);
+    public CommunicationData selectCard(Card pojo);
 
     /**
-     * 更新
-     * @param pojo
+     * 新增
+     * @param card
      * @return
      */
-    public int update(Card pojo);
+    public CommunicationData insertCard(Card card);
+
+    /**
+     * 更新 updateCard
+     * @param card
+     * @return
+     */
+    public CommunicationData updateCard(Card card);
+
 
 }

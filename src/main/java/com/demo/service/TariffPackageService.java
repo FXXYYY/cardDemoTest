@@ -2,6 +2,7 @@ package com.demo.service;
 
 import com.demo.domains.TariffPackage;
 import com.demo.dao.TariffPackageDao;
+import com.demo.util.CommunicationData;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,4 +41,24 @@ public interface TariffPackageService {
      */
     public int update(TariffPackage pojo);
 
+    /**
+     * 查询
+     * @param pojo
+     * @return
+     */
+    CommunicationData selectTariffPackage(TariffPackage pojo);
+
+    /**
+     * 新增
+     * @param debitCard
+     * @return
+     */
+    CommunicationData addTariffPackage(TariffPackage debitCard);
+
+    /**
+     * 修改
+     * @param debitCard
+     * @return
+     */
+    CommunicationData updateTariffPackage(TariffPackage debitCard);
 }

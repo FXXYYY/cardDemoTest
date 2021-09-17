@@ -29,7 +29,7 @@ public class DebitCard {
     private Long resId;
 
     /**
-     * 创建时间T
+     * 创建时间
      */
     private String createTime;
 
@@ -40,7 +40,7 @@ public class DebitCard {
     private String modifyTime;
 
     /**
-     * 状态 TODO 此字段的用处？
+     * 状态 {0:正常、1:冻结、2:销户、3:挂失、4:锁定、5:止付}
      */
     private Integer status;
 

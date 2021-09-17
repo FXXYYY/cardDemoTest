@@ -58,6 +58,7 @@
         </trim>
     </insert>
 
+
 <!--auto generated Code-->
     <insert id="insertList">
         INSERT INTO tb_card(
@@ -112,6 +113,14 @@
             <if test="pojo.remark != null"> AND remark = #{pojo.remark} </if>
         </where>
         LIMIT 1000 
+    </select>
+    <select id="selectById" parameterType="long" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM tb_card
+        <where>
+            where id = #{id}
+        </where>
+        LIMIT 1000
     </select>
 
 <!--auto generated Code-->

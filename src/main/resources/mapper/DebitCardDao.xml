@@ -47,6 +47,28 @@
             <if test="pojo.modifyTime != null"> #{pojo.modifyTime}, </if>
         </trim>
     </insert>
+    <insert id="insertReturnId" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_debit_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> id, </if>
+            <if test="pojo.userId != null"> user_id, </if>
+            <if test="pojo.resId != null"> res_id, </if>
+            <if test="pojo.status != null"> status, </if>
+            <if test="pojo.isDelete != null"> is_delete, </if>
+            <if test="pojo.createTime != null"> create_time, </if>
+            <if test="pojo.modifyTime != null"> modify_time, </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pojo.id != null"> #{pojo.id}, </if>
+            <if test="pojo.userId != null"> #{pojo.userId}, </if>
+            <if test="pojo.resId != null"> #{pojo.resId}, </if>
+            <if test="pojo.status != null"> #{pojo.status}, </if>
+            <if test="pojo.isDelete != null"> #{pojo.isDelete}, </if>
+            <if test="pojo.createTime != null"> #{pojo.createTime}, </if>
+            <if test="pojo.modifyTime != null"> #{pojo.modifyTime}, </if>
+        </trim>
+    </insert>
 
 <!--auto generated Code-->
     <insert id="insertList">
@@ -93,6 +115,13 @@
             <if test="pojo.isDelete != null"> AND is_delete = #{pojo.isDelete} </if>
         </where>
         LIMIT 1000 
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="AllColumnMap">
+        SELECT <include refid="all_column"/>
+        FROM tb_debit_card
+        WHERE id = #{id}
+        LIMIT 1000
     </select>
 
 <!--auto generated Code-->

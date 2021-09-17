@@ -20,6 +20,7 @@ public interface CardDao {
      */
     int insert(@Param("pojo") Card pojo);
 
+
     /**
      * 批量添加
      * @param pojo 卡
@@ -41,4 +42,10 @@ public interface CardDao {
      */
     int update(@Param("pojo") Card pojo);
 
+    /**
+     * select by id
+     * @param id
+     * @return
+     */
+    Card selectById(Long id);
 }

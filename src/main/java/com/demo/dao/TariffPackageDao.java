@@ -35,6 +35,13 @@ public interface TariffPackageDao {
     List<TariffPackage> select(@Param("pojo") TariffPackage pojo);
 
     /**
+     * 查询
+     * @param id
+     * @return
+     */
+    TariffPackage selectById(Long id);
+
+    /**
      * 修改
      * @param pojo
      * @return

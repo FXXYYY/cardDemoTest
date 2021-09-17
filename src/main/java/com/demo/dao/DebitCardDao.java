@@ -1,5 +1,6 @@
 package com.demo.dao;
 
+import com.demo.domains.Card;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -39,5 +40,20 @@ public interface DebitCardDao {
      * @return
      */
     int update(@Param("pojo") DebitCard pojo);
+
+    /**
+     * 查询
+     * @param id
+     * @return
+     */
+    DebitCard selectById(Long id);
+
+    /**
+     * 添加并返回id
+     * @param pojo
+     * @return id
+     */
+    Long insertReturnId(@Param("pojo") DebitCard pojo);
+
 
 }

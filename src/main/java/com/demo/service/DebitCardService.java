@@ -2,6 +2,8 @@ package com.demo.service;
 
 import com.demo.domains.DebitCard;
 import com.demo.dao.DebitCardDao;
+import com.demo.domains.User;
+import com.demo.util.CommunicationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -40,5 +42,27 @@ public interface DebitCardService {
      * @return
      */
     public int update(DebitCard pojo);
+
+    /**
+     * 查询
+     * @param pojo
+     * @return
+     */
+    CommunicationData selectDebitCard(DebitCard pojo);
+
+    /**
+     * 新增
+     * @param debitCard
+     * @return
+     */
+    CommunicationData addDebitCard(DebitCard debitCard);
+
+    /**
+     * 修改
+     * @param debitCard
+     * @return
+     */
+    CommunicationData updateDebitCard(DebitCard debitCard);
+
 
 }
